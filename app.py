@@ -157,9 +157,8 @@ def event_handle(event):
            replyObj = TextSendMessage(text="ง่วงมาก")
         else:
             headers = request.headers 
-            json_headers = json.dumps({k:v for k, v in headers.items()}) 
-            json_line = request.get_json(force=False,cache=False) 
-            ''' 
+            json_headers = json.dumps({k:v for k, v in headers.items()})
+            '''
             json_line = json.dumps(json_line)
             decoded = json.loads(json_line) 
             crl= pycurl.Curl() 
@@ -176,6 +175,7 @@ def event_handle(event):
             '''
             replyObj = TextSendMessage(text=json_headers) 
             line_bot_api.reply_message(rtoken, replyObj)
+            
     elif msgType == "image":
         try:
             message_content = line_bot_api.get_message_content(event['message']['id'])
