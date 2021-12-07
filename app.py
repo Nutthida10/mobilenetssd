@@ -151,14 +151,14 @@ def event_handle(event):
      
     
     if msgType == "text":
-        msg = str(event["message"]["text"])
-        if (msg == "สวัสดี") :
-           replyObj = TextSendMessage(text="สวัสดีจ้าาา")
-        elif (msg == "กินข้าวยัง") :
-           replyObj = TextSendMessage(text="ยังเลย")
-        elif (msg == "ง่วงนอนไหม") :
-           replyObj = TextSendMessage(text="ง่วงมาก")
-        else:
+         msg = str(event["message"]["text"])
+         if (msg == "สวัสดี") :
+            replyObj = TextSendMessage(text="สวัสดีจ้าาา")
+         elif (msg == "กินข้าวยัง") :
+            replyObj = TextSendMessage(text="ยังเลย")
+         elif (msg == "ง่วงนอนไหม") :
+            replyObj = TextSendMessage(text="ง่วงมาก")
+         else:
             headers = request.headers 
             json_headers = json.dumps({k:v for k, v in headers.items()})
             '''
