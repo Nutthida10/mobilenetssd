@@ -147,6 +147,9 @@ def event_handle(event):
         return ''
 
     
+     
+     
+    
     if msgType == "text":
         msg = str(event["message"]["text"])
         if (msg == "สวัสดี") :
@@ -176,7 +179,32 @@ def event_handle(event):
             replyObj = TextSendMessage(text=json_headers) 
             line_bot_api.reply_message(rtoken, replyObj)
             
-    elif msgType == "image":
+     elif msgType == "image":
+        try:
+            message_content = line_bot_api.get_message_content(event['message']['id'])
+            i = Image.open(BytesIO(message_content.content))
+            filename = event['message']['id'] + '.jpg'
+            i.save(UPLOAD_FOLDER + filename)
+            process_file(os.path.join(UPLOAD_FOLDER, filename), filename)
+
+            url = request.url_root + DOWNLOAD_FOLDER + filename
+            
+            line_bot_api.reply_message(
+                rtoken, [
+                    TextSendMessage(text='Object detection result:'),
+                    ImageSendMessage(url,url)
+                ])         elif msgType == "image":
+        try:
+            message_content = line_bot_api.get_message_content(event['message']['id'])
+            i = Image.open(BytesIO(message_content.content))
+            filename = event['message']['id'] + '.jpg'
+            i.save(UPLOAD_FOLDER + filename)
+            process_file(os.path.join(UPLOAD_FOLDER, filename), filename)
+
+            url = request.url_root + DOWNLOAD_FOLDER + filename
+            
+            line_bot_api.reply_message(
+                rtoken, [     elif msgType == "image":
         try:
             message_content = line_bot_api.get_message_content(event['message']['id'])
             i = Image.open(BytesIO(message_content.content))
@@ -191,6 +219,19 @@ def event_handle(event):
                     TextSendMessage(text='Object detection result:'),
                     ImageSendMessage(url,url)
                 ])    
+    
+        except:
+            message = TextSendMessage(text="เกิดข้อผิดพลาด กรุณาส่งใหม่อีกครั้ง")
+            line_bot_api.reply_message(event.reply_token, message)
+
+                    TextSendMessage(text='Object detection result:'),
+                    ImageSendMessage(url,url)
+                ])    
+    
+        except:
+            message = TextSendMessage(text="เกิดข้อผิดพลาด กรุณาส่งใหม่อีกครั้ง")
+            line_bot_api.reply_message(event.reply_token, message)
+
     
         except:
             message = TextSendMessage(text="เกิดข้อผิดพลาด กรุณาส่งใหม่อีกครั้ง")
