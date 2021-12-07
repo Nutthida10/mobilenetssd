@@ -147,7 +147,6 @@ def event_handle(event):
         return ''
 
     
-     
      if msgType == "text":
          msg = str(event["message"]["text"])
          if (msg == "สวัสดี") :
