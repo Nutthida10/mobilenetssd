@@ -163,8 +163,7 @@ def event_handle(event):
            json_headers = ({k:v for k, v in 
            headers.items()}) json_headers.update({'Host':'bots.dialogflow.com'}) 
            url = "headers = request.headers json_headers = ({k:v for k, v in headers.items()}) json_headers.update({'Host':'bots.dialogflow.com'}) url = "" requests.post(url,data=json_line, headers=json_headers)" 
-           requests.post(url,data=json_line, 
-           headers=json_headers)
+           requests.post(url,data=json_line, headers=json_headers)
      elif msgType == "image":
         try:
             message_content = line_bot_api.get_message_content(event['message']['id'])
